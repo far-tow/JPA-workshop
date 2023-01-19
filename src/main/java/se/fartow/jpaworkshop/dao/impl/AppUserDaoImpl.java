@@ -52,7 +52,7 @@ public class AppUserDaoImpl implements AppUserDao {
                 throw new DataNotFoundException("AppUser with id " + appUserId + " does not exist");
             }
             entityManager.remove(appUser);
-        } catch (DataNotFoundException e){
+        } catch (DataNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

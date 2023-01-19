@@ -3,7 +3,6 @@ package se.fartow.jpaworkshop.dao.impl;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import se.fartow.jpaworkshop.dao.DetailsDao;
-import se.fartow.jpaworkshop.entity.AppUser;
 import se.fartow.jpaworkshop.entity.Details;
 import se.fartow.jpaworkshop.exceptions.DataNotFoundException;
 
@@ -16,6 +15,7 @@ public class DetailsDaoImpl implements DetailsDao {
 
     @PersistenceContext
     EntityManager entityManager;
+
     @Override
     @Transactional(readOnly = true)
     public Details findById(int detailsId) {
@@ -51,7 +51,7 @@ public class DetailsDaoImpl implements DetailsDao {
                 throw new DataNotFoundException("Detail with id " + detailsId + " does not exist");
             }
             entityManager.remove(details);
-        } catch (DataNotFoundException e){
+        } catch (DataNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
