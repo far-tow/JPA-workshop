@@ -46,11 +46,13 @@ public class AppUserDaoImpl implements AppUserDao {
     @Override
     @Transactional
     public void delete(int appUserId) {
-        AppUser appUser = entityManager.find(AppUser.class, appUserId);
-        if (appUser != null) entityManager.remove(appUser);
-        else try {
-            throw new DataNotFoundException("AppUser id dosn't exist!");
-        }catch (DataNotFoundException e){
+        try {
+            AppUser appUser = entityManager.find(AppUser.class, appUserId);
+            if (appUser == null) {
+                throw new DataNotFoundException("AppUser with id " + appUserId + " does not exist");
+            }
+            entityManager.remove(appUser);
+        } catch (DataNotFoundException e){
             throw new RuntimeException(e);
         }
     }
