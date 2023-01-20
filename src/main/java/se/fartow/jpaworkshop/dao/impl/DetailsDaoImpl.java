@@ -32,12 +32,14 @@ public class DetailsDaoImpl implements DetailsDao {
     @Override
     @Transactional
     public Details create(Details details) {
-        if (details == null) throw new IllegalArgumentException("Details was null");
+       if (details == null){
+           throw new IllegalArgumentException("Details was null");
+       }
         entityManager.persist(details);
         return details;
     }
-
     @Override
+    @Transactional
     public Details update(Details details) {
         return entityManager.merge(details);
     }

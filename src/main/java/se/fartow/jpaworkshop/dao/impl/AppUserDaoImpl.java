@@ -32,7 +32,9 @@ public class AppUserDaoImpl implements AppUserDao {
     @Override
     @Transactional
     public AppUser create(AppUser appUser) {
-        if (appUser == null) throw new IllegalArgumentException("AppUser was null");
+        if (appUser == null){
+            throw new IllegalArgumentException("AppUser was null");
+        }
         entityManager.persist(appUser);
         return appUser;
     }
