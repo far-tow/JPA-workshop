@@ -18,9 +18,9 @@ public class AppUserDaoImpl implements AppUserDao {
 
     @Override
     @Transactional(readOnly = true)
-    public AppUser findById(int appUserId) {
-        if (appUserId == 0) throw new IllegalArgumentException("Id can not be null");
-        return entityManager.find(AppUser.class, appUserId);
+    public AppUser findById(int id) {
+        if (id == 0) throw new IllegalArgumentException("Id can not be null");
+        return entityManager.find(AppUser.class, id);
     }
 
     @Override
@@ -41,17 +41,17 @@ public class AppUserDaoImpl implements AppUserDao {
 
     @Override
     @Transactional
-    public AppUser update(AppUser appUser) {
-        return entityManager.merge(appUser);
+    public AppUser update(AppUser id) {
+        return entityManager.merge(id);
     }
 
     @Override
     @Transactional
-    public void delete(int appUserId) {
+    public void delete(int id) {
         try {
-            AppUser appUser = entityManager.find(AppUser.class, appUserId);
+            AppUser appUser = entityManager.find(AppUser.class, id);
             if (appUser == null) {
-                throw new DataNotFoundException("AppUser with id " + appUserId + " does not exist");
+                throw new DataNotFoundException("AppUser with id " + id + " does not exist");
             }
             entityManager.remove(appUser);
         } catch (DataNotFoundException e) {

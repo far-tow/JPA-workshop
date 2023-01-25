@@ -7,7 +7,8 @@ import java.time.LocalDate;
 
 
 @Data
-@AllArgsConstructor
+@EqualsAndHashCode
+@ToString(exclude = "details")
 @Entity
 public class AppUser {
 
@@ -17,6 +18,7 @@ public class AppUser {
     private int id;
     @Column(nullable = false, length = 100, unique = true)
     private String userName;
+    @Column(nullable = false)
     private String password;
     @Column(nullable = false)
     private LocalDate regDate;

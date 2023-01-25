@@ -5,7 +5,7 @@ import se.fartow.jpaworkshop.entity.AppUser;
 import java.util.Collection;
 
 public interface AppUserDao {
-    AppUser findById(int appUserId);
+    AppUser findById(int id);
 
     Collection<AppUser> findAll();
 
@@ -13,5 +13,5 @@ public interface AppUserDao {
 
     AppUser update(AppUser appUser);
 
-    void delete(int appUserId);
+    void delete(int id);
 }

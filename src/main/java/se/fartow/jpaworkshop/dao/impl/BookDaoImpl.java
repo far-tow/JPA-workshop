@@ -2,7 +2,8 @@ package se.fartow.jpaworkshop.dao.impl;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import se.fartow.jpaworkshop.dao.DetailsDao;
+import se.fartow.jpaworkshop.dao.BookDao;
+import se.fartow.jpaworkshop.entity.Book;
 import se.fartow.jpaworkshop.entity.Details;
 import se.fartow.jpaworkshop.exceptions.DataNotFoundException;
 
@@ -11,51 +12,52 @@ import javax.persistence.PersistenceContext;
 import java.util.Collection;
 
 @Repository
-public class DetailsDaoImpl implements DetailsDao {
+public class BookDaoImpl implements BookDao {
 
     @PersistenceContext
     EntityManager entityManager;
 
     @Override
     @Transactional(readOnly = true)
-    public Details findById(int id) {
+    public Book findById(int id) {
         if (id == 0) throw new IllegalArgumentException("Id can not be null");
-        return entityManager.find(Details.class, id);
+        return entityManager.find(Book.class, id);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Collection<Details> findAll() {
-        return entityManager.createQuery("SELECT d FROM Details d", Details.class).getResultList();
+    public Collection<Book> findAll() {
+        return entityManager.createQuery("SELECT b FROM Book b", Book.class).getResultList();
     }
 
     @Override
     @Transactional
-    public Details create(Details details) {
-        if (details == null) {
-            throw new IllegalArgumentException("Details was null");
+    public Book create(Book book) {
+        if (book == null) {
+            throw new IllegalArgumentException("Book was null");
         }
-        entityManager.persist(details);
-        return details;
+        entityManager.persist(book);
+        return book;
     }
 
     @Override
     @Transactional
-    public Details update(Details details) {
-        return entityManager.merge(details);
+    public Book update(Book book) {
+        return entityManager.merge(book);
     }
 
     @Override
     @Transactional
     public void delete(int id) {
         try {
-            Details details = entityManager.find(Details.class, id);
-            if (details == null) {
-                throw new DataNotFoundException("Detail with id " + id + " does not exist");
+            Book book = entityManager.find(Book.class, id);
+            if (book == null) {
+                throw new DataNotFoundException("Book with id " + id + " does not exist");
             }
-            entityManager.remove(details);
+            entityManager.remove(book);
         } catch (DataNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 }
+
