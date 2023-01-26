@@ -8,6 +8,8 @@ import se.fartow.jpaworkshop.dao.BookDao;
 import se.fartow.jpaworkshop.dao.BookLoanDao;
 import se.fartow.jpaworkshop.dao.DetailsDao;
 import se.fartow.jpaworkshop.entity.AppUser;
+import se.fartow.jpaworkshop.entity.Book;
+import se.fartow.jpaworkshop.entity.BookLoan;
 import se.fartow.jpaworkshop.entity.Details;
 
 import java.time.LocalDate;
@@ -55,7 +57,15 @@ public class AppCommandLineRunner implements CommandLineRunner {
         System.out.println(user2);*/
 
         System.out.println("######## Book & BookLoan ######## ");
+        Book book1 = bookDao.create(new Book("978-91-88489-20-3", "Ledarskap i Offentlighet", 10 ));
+        Book book2 = bookDao.create(new Book("978-91-88489-20-4", "Offentlig Ledare", 50 ));
 
+        BookLoan loan1 = bookLoanDao.create(new BookLoan(LocalDate.parse("2023-01-01"), false, user1, book1));
 
+        System.out.println(bookLoanDao.findById(1).getBorrower());
+        book2.setTitle("Test BOOK");
+        System.out.println(bookDao.update(book2));
+        loan1.setReturned(true);
+        System.out.println(bookLoanDao.update(loan1));
     }
 }

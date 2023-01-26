@@ -1,15 +1,12 @@
 package se.fartow.jpaworkshop.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @EqualsAndHashCode
-@ToString(exclude = "")
+@ToString
 @Entity
 public class Book {
     @Id
@@ -23,4 +20,13 @@ public class Book {
     @Column(nullable = false)
     private int maxLoanDays;
 
+   public Book(String isbn, String title, int maxLoanDays) {
+       this.isbn = isbn;
+       this.title = title;
+       this.maxLoanDays = maxLoanDays;
+   }
+
+    public Book() {
+
+    }
 }

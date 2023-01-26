@@ -22,7 +22,7 @@ public class AppUser {
     private String password;
     @Column(nullable = false)
     private LocalDate regDate;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "details_id")
     private Details details;
 

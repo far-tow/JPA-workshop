@@ -27,4 +27,15 @@ public class BookLoan {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "book_id")
     private Book book;
+
+    public BookLoan(LocalDate dueDate, boolean returned, AppUser borrower, Book book) {
+        this.dueDate = dueDate;
+        this.returned = returned;
+        this.borrower = borrower;
+        this.book = book;
+    }
+
+    public BookLoan() {
+
+    }
 }
