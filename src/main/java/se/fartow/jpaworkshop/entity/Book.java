@@ -3,6 +3,7 @@ package se.fartow.jpaworkshop.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @EqualsAndHashCode
@@ -19,6 +20,8 @@ public class Book {
     private String title;
     @Column(nullable = false)
     private int maxLoanDays;
+    @ManyToMany
+    private Set<Author> authors;
 
    public Book(String isbn, String title, int maxLoanDays) {
        this.isbn = isbn;

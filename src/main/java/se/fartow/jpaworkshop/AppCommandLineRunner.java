@@ -12,6 +12,7 @@ import se.fartow.jpaworkshop.entity.Book;
 import se.fartow.jpaworkshop.entity.BookLoan;
 import se.fartow.jpaworkshop.entity.Details;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
 
 @Component
@@ -67,5 +68,7 @@ public class AppCommandLineRunner implements CommandLineRunner {
         System.out.println(bookDao.update(book2));
         loan1.setReturned(true);
         System.out.println(bookLoanDao.update(loan1));
+
+
     }
 }
