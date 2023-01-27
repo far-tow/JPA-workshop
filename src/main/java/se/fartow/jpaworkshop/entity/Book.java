@@ -30,7 +30,7 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "author_id", table = "book_author")
     )
     private Set<Author> authors;
-    public void addBook(Author author){
+    public void addAuthor(Author author){
         if (author != null && authors != null){
             authors.add(author);
         }else {
@@ -42,7 +42,7 @@ public class Book {
         }
     }
 
-    public void removeBook (Author author) {
+    public void removeAuthor (Author author) {
         if (author != null && authors != null) {
             authors.remove(author);
         } else {
