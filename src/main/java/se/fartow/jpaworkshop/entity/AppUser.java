@@ -4,11 +4,12 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Data
 @EqualsAndHashCode
-@ToString(exclude = "details")
+@ToString
 @Entity
 public class AppUser {
 
@@ -22,9 +23,15 @@ public class AppUser {
     private String password;
     @Column(nullable = false)
     private LocalDate regDate;
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "details_id")
     private Details details;
+
+    @OneToMany(
+            cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST},
+            mappedBy = "borrower"
+    )
+    private List<BookLoan> loans;
 
     public AppUser() {
         this.regDate = LocalDate.now();

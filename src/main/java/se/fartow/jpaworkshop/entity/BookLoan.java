@@ -20,7 +20,7 @@ public class BookLoan {
     private LocalDate dueDate;
     @Column(nullable = false)
     private boolean returned;
-    //todo: change to appropriate CascadeType later!!!!
+
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "appuser_id")
     private AppUser borrower;
